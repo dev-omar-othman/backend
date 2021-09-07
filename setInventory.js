@@ -29,7 +29,7 @@
     range:"Out",
     valueInputOption:"RAW",
     resource:{
-      values:[sku]
+      values:[...sku]
     }
   })
   console.log('set Sheets')

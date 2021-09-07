@@ -1,5 +1,7 @@
 var https = require('follow-redirects').https;
 var fs = require('fs');
+let  finalOrders = []
+function getOrders(){
 var options = {
   'method': 'GET',
   'hostname': 'mollyandstitchus.myshopify.com',
@@ -9,7 +11,7 @@ var options = {
   },
   'maxRedirects': 20
 };
-let finalOrders = []
+
 var req = https.request(options, function (res) {
   var chunks = [];
 
@@ -43,7 +45,6 @@ var req = https.request(options, function (res) {
      } else {
        console.log('fetched unfulfilled orders')
        }
-       console.log('fetched unfulfilled orders')
      })
   });
 
@@ -53,6 +54,6 @@ var req = https.request(options, function (res) {
 });
 
 req.end();
-
-module.exports.req = req;
+}
+module.exports.getOrders = getOrders;
 module.exports.finalOrders = finalOrders;

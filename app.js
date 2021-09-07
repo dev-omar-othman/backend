@@ -8,10 +8,10 @@ var server = http.createServer(app);
 const {google} = require("googleapis");
 // use it before all route definitions
 app.use(cors({origin: '*'}));
-app.use(express.static("../JSON")); // exposes index.html, per below
+app.use(express.static("../JSON",{etag: false})); // exposes index.html, per below
 app.get('/getUnfulfilledOrders',function(req,res){
-  req.headers['mode'] = 'no-cors',
-  require('./getUnfulfilledOrders').req;
+req.headers['mode'] = 'no-cors';
+require('./getUnfulfilledOrders').getOrders();
   res.send("orders fetched!");
 });
 app.get('/setParcel', function(req,res){

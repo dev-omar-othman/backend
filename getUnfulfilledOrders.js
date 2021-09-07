@@ -46,11 +46,12 @@ var req = https.request(options, function (res) {
        console.log('fetched unfulfilled orders')
        }
      })
+     finalOrders = [];
   });
 
   res.on("error", function (error) {
     console.error(error);
-  });0
+  });
 });
 
 req.end();

@@ -43,6 +43,7 @@ var req = https.request(options, function (res) {
      } else {
        console.log('fetched unfulfilled orders')
        }
+       console.log('fetched unfulfilled orders')
      })
   });
 

@@ -1,11 +1,5 @@
  async function setSheets(passedSku){ //client instance
-  passedSku = passedSku.replace('[',"");
-  passedSku = passedSku.replace(']',"");
-  passedSku = passedSku.replace(/",/g,"],");
-  passedSku = passedSku.replace(/,"/g,",[");
-  passedSku = passedSku.replace(/'/g,"");
-  passedSku = passedSku.replace(`'"`,"[");
-  passedSku = passedSku.replace(`"'`,"]");
+ 
 
   const {google} = require("googleapis");
   const auth = new google.auth.GoogleAuth({
@@ -26,9 +20,8 @@
     spreadsheetId,
 
   });
-  var sku=passedSku.split(",");
-  for(var counter = 0; counter < sku.length; counter++){
-  }
+  var sku=passedSku;
+
   //write row(s) to spreadsheet
  await googleSheets.spreadsheets.values.append({
     auth,
@@ -36,10 +29,10 @@
     range:"Out",
     valueInputOption:"RAW",
     resource:{
-      values:[["123123"],["123123"]]
+      values:[sku]
     }
   })
   console.log('set Sheets')
-  console.log(sku)
+  console.log([sku])
 }
 module.exports.setSheets = setSheets;

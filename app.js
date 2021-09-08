@@ -39,4 +39,8 @@ app.get("/fulfillSheets", async (req , res) =>{
   require('./setInventory').setSheets(JSON.parse(req.query.data));
   res.send("sheet updated");
 });
+app.get("/fulfillShopify", async (req , res) =>{
+  require('./shopifyFulfillment').shopifyFulfillment(req.query.data);
+  res.send("order Fulfilled!");
+});
 server.listen(port,(req,res) => console.log(`running on ${port}`));

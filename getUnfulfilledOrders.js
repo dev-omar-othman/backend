@@ -25,6 +25,7 @@ var req = https.request(options, function (res) {
     for(var i = 0; i < orders.orders.length; i++){
         
         let orderData = {
+            orderNumber : orders.orders[i].id,
             orderTotalPrice : orders.orders[i].total_price,
             orderId: orders.orders[i].name,
             destination: orders.orders[i].shipping_address.address1,
@@ -33,8 +34,11 @@ var req = https.request(options, function (res) {
             orderDescription:[] 
         }
         for(var j = 0; orders.orders[i].line_items.length > j ; j++){
+          for(var quantityCounter = 0; quantityCounter < orders.orders[i].line_items[j].quantity; quantityCounter++ ){
             orderData.orderDescription.push (orders.orders[i].line_items[j].title +" "+ orders.orders[i].line_items[j].variant_title);
             orderData.itemsSku.push(orders.orders[i].line_items[j].sku);
+          }
+            
         }
         finalOrders.push(orderData);
     

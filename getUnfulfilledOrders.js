@@ -11,7 +11,10 @@ var options = {
   },
   'maxRedirects': 20
 };
-
+function Items (barcode,qty){
+  this.barcode = barcode;
+  this.qty = qty;
+};
 var req = https.request(options, function (res) {
   var chunks = [];
 
@@ -31,12 +34,14 @@ var req = https.request(options, function (res) {
             destination: orders.orders[i].shipping_address.address1,
             customer: orders.orders[i].shipping_address.name,
             itemsSku:[],
+            itemsQuantity:[],
             orderDescription:[] 
         }
         for(var j = 0; orders.orders[i].line_items.length > j ; j++){
           for(var quantityCounter = 0; quantityCounter < orders.orders[i].line_items[j].quantity; quantityCounter++ ){
             orderData.orderDescription.push (orders.orders[i].line_items[j].title +" "+ orders.orders[i].line_items[j].variant_title);
             orderData.itemsSku.push(orders.orders[i].line_items[j].sku);
+            orderData.itemsQuantity.push(new Items(orders.orders[i].line_items[j].sku,orders.orders[i].line_items[j].quantity))
           }
             
         }

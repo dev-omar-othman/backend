@@ -14,17 +14,6 @@ req.headers['mode'] = 'no-cors';
 require('./getUnfulfilledOrders').getOrders();
   res.send("orders fetched!");
 });
-app.get('/setParcel', function(req,res){
-  req.headers['mode'] = 'no-cors';
-  async function getMyLabel(){
-    await require('./testPrcel').setPostData(req.query.data);
-    res.body = global.shippingLabel;
-    res.send({body: global.shippingLabel})
-    console.log("setinv from setparcel"+global.shippingLabel)
-  }
-  getMyLabel();
-});
-//start
 app.get('/updateData', function(req,res){
   req.headers['mode'] = 'no-cors';
   require('./testPrcel').setPostData(req.query.data);
@@ -34,13 +23,21 @@ app.get('/updateData', function(req,res){
    console.log("setinv"+global.shippingLabel)
   }, 2500);
 });
-//end
 app.get("/fulfillSheets", async (req , res) =>{
   require('./setInventory').setSheets(JSON.parse(req.query.data));
   res.send("sheet updated");
+});
+app.get("/getSheetsData", async (req , res) =>{
+  await require('./getSheetData').getSheets();
+  res.send('sheet fetched');
+});
+app.get("/showQty", async (req , res) =>{
+  require('./unfulfilledFiltering').filterData();
+  req.headers['mode'] = 'no-cors';
+  res.send('sheet filtered');
 });
 app.get("/fulfillShopify", async (req , res) =>{
   require('./shopifyFulfillment').shopifyFulfillment(req.query.data);
   res.send("order Fulfilled!");
 });
-server.listen(port,(req,res) => console.log(`running on ${port}`));
+server.listen(port,() => console.log(`running on ${port}`));

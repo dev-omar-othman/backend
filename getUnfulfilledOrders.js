@@ -36,6 +36,7 @@ var req = https.request(options, function (res) {
             postalCode : orders.orders[i].shipping_address.zip,
             countryCode : orders.orders[i].shipping_address.country_code,
             state : orders.orders[i].shipping_address.province_code,
+            city : orders.orders[i].shipping_address.city,
             customer: orders.orders[i].shipping_address.name,
             itemsSku:[],
             itemsQuantity:[],

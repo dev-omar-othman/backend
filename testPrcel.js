@@ -22,8 +22,9 @@ var req = https.request(options, await function (res) {
 
   res.on("end",  function (chunk) {
     var body = Buffer.concat(chunks);
-    //console.log(JSON.parse(body.toString()).messages.receiver[0].address[0])
     global.shippingLabel = JSON.parse(body.toString()).labels[0].url;
+    global.trackingUrl = JSON.parse(body.toString()).tracking_url;
+    global.trackingNo = JSON.parse(body.toString()).sendle_reference;
   });
   res.on("error", function (error) {
     console.error(error);

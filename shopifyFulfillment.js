@@ -1,6 +1,6 @@
 var https = require('follow-redirects').https;
 var fs = require('fs');
-function shopifyFulfillment(orderId){
+function shopifyFulfillment(orderId,trackingUrl,trackingNo){
 var options = {
   'method': 'POST',
   'hostname': 'mollyandstitchus.myshopify.com',
@@ -31,7 +31,11 @@ var req = https.request(options, function (res) {
 var postData = JSON.stringify({
   "fulfillment": {
     "location_id": 61126803622,
-    "tracking_number": null
+    "tracking_number": trackingNo,
+    "tracking_urls": [
+      trackingUrl
+    ],
+    "notify_customer": true
   }
 });
 

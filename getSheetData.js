@@ -50,7 +50,6 @@ async function getSheets(){ //client instance
         formattedData.push(new InvItems(myItem[0],myItem[1]));
       }
     })
-    console.log(formattedData)
 setTimeout(() => {
   fs.writeFile('../JSON/fetchedData.json', JSON.stringify(formattedData,null,2), err => {
     if (err) {

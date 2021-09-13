@@ -37,7 +37,12 @@ app.get('/updateData', function(req,res){
   require('./testPrcel').setPostData(req.query.data);
   setTimeout(() => {
     res.body = global.shippingLabel;
-   res.send({body: global.shippingLabel})
+   res.send({body: {
+     label :global.shippingLabel,
+     url : global.trackingUrl,
+     trackingNo : global.trackingNo,    
+    }
+  })
   }, 2500);
 });
 app.get("/fulfillSheets", async (req , res) =>{
@@ -46,7 +51,7 @@ app.get("/fulfillSheets", async (req , res) =>{
 });
 
 app.get("/fulfillShopify", async (req , res) =>{
-  require('./shopifyFulfillment').shopifyFulfillment(req.query.data);
+  require('./shopifyFulfillment').shopifyFulfillment(req.query.orderid , req.query.trackingUrl,req.query.trackingNo);
   res.send("order Fulfilled!");
 });
 

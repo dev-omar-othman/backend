@@ -4,11 +4,11 @@ async function setPostData(newData){
 var postData = newData;
 var options = {
   'method': 'POST',
-  'hostname': 'sandbox.sendle.com',
+  'hostname': 'api.sendle.com',
   'path': '/api/orders',
   'headers': {
     'Origin': '',
-    'Authorization': 'Basic U0FOREJPWF9vbWFyX3JlYmVsbWFya2V0aW5nYzpzYW5kYm94X2dCZlJDR1d0dzJ2V25RU1RXeUZ0ZEp5Zw==',
+    'Authorization': 'Basic ZWR3YXJkX21vbGx5YW5kc3RpdGM6WkZxTjdLdlA0eXBmajYzS3dGNDdXQzVt',
     'Content-Type': 'application/json'
   },
   'maxRedirects': 20
@@ -22,8 +22,8 @@ var req = https.request(options, await function (res) {
 
   res.on("end",  function (chunk) {
     var body = Buffer.concat(chunks);
+    //console.log(JSON.parse(body.toString()).messages.receiver[0].address[0])
     global.shippingLabel = JSON.parse(body.toString()).labels[0].url;
-    console.log("test:"+global.shippingLabel)
   });
   res.on("error", function (error) {
     console.error(error);

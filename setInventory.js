@@ -20,8 +20,11 @@
     spreadsheetId,
 
   });
-  var sku=passedSku;
-
+  var sku= [];
+  for(let i = 0; i < passedSku.length; i++){
+    let singleSku = [passedSku[i]]
+   sku.push(singleSku)
+  }
   //write row(s) to spreadsheet
  await googleSheets.spreadsheets.values.append({
     auth,
@@ -29,10 +32,9 @@
     range:"Out",
     valueInputOption:"RAW",
     resource:{
-      values:[sku]
+      values:sku
     }
   })
   console.log('set Sheets')
-  console.log([sku])
 }
 module.exports.setSheets = setSheets;

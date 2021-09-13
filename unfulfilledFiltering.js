@@ -1,7 +1,7 @@
 var http = require('follow-redirects').http;
 var fs = require('fs');
 
-function filterData(){
+async function filterData(){
   let ordersQty = [];
   let inventoryQty = [];
   let unfulfilledOrdersData = [];
@@ -75,6 +75,8 @@ var req2 = http.request(options2, function (res) {
             }
             
           }
+        }else{
+
         }
       })
     }

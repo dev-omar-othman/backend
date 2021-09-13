@@ -31,11 +31,17 @@ var req = https.request(options, function (res) {
             orderNumber : orders.orders[i].id,
             orderTotalPrice : orders.orders[i].total_price,
             orderId: orders.orders[i].name,
-            destination: orders.orders[i].shipping_address.address1,
+            destination1: orders.orders[i].shipping_address.address1 ,
+            destination2: orders.orders[i].shipping_address.address2 ,
+            postalCode : orders.orders[i].shipping_address.zip,
+            countryCode : orders.orders[i].shipping_address.country_code,
+            state : orders.orders[i].shipping_address.province_code,
             customer: orders.orders[i].shipping_address.name,
             itemsSku:[],
             itemsQuantity:[],
-            orderDescription:[] 
+            orderDescription:[],
+            orderDate : new Date (orders.orders[i].updated_at),
+            
         }
         for(var j = 0; orders.orders[i].line_items.length > j ; j++){
           for(var quantityCounter = 0; quantityCounter < orders.orders[i].line_items[j].quantity; quantityCounter++ ){

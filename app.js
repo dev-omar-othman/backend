@@ -10,6 +10,11 @@ const {google} = require("googleapis");
 app.use(cors({origin: '*'}));
 app.use(express.static("../JSON",{etag: false})); // exposes index.html, per below
 
+app.get('/test', function(req,res){
+req.headers['mode'] = 'no-cors';
+require('./getSheetData').getSheets();
+});
+
 app.get('/runApp', function(req,res){
   req.headers['mode'] = 'no-cors';
   try{

@@ -12,7 +12,7 @@
   // googlesheets instance
 
   const googleSheets = google.sheets({version: "v4", auth:client});
-  const spreadsheetId = "1hKPmIob8qWIFeLOQokY70aDeDlJBCLcaChQiwo7L1JM";
+  const spreadsheetId = "1etlDo-79jDPxf9m-6Nwbr6_73VAiwBzxdKVp1XTDoUk";
   
   // get metadata about spreadsheet
   const metaData = await googleSheets.spreadsheets.get({

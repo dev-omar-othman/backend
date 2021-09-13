@@ -2,7 +2,7 @@ async function getSheets(){ //client instance
     var fs = require('fs');
     const {google} = require("googleapis");
     const auth = new google.auth.GoogleAuth({
-        keyFile:"credentials.json",
+        keyFile:"molly-and-stitch-fulfillment-4f75556c9f54.json",
         scopes:"https://www.googleapis.com/auth/spreadsheets"
       });
     
@@ -17,7 +17,7 @@ async function getSheets(){ //client instance
       // googlesheets instance
     
       const googleSheets = google.sheets({version: "v4", auth:client});
-      const spreadsheetId = "1hKPmIob8qWIFeLOQokY70aDeDlJBCLcaChQiwo7L1JM";
+      const spreadsheetId = "1etlDo-79jDPxf9m-6Nwbr6_73VAiwBzxdKVp1XTDoUk";
       
       // get metadata about spreadsheet
       const metaData = await googleSheets.spreadsheets.get({
@@ -43,21 +43,24 @@ async function getSheets(){ //client instance
     
     let formattedData =[];
     let sheetData = getRows.data.valueRanges;
+    
     sheetData.map(item =>{
       for(var valuesCounter = 0; valuesCounter < item.values.length; valuesCounter++){
         let myItem = item.values[valuesCounter];
         formattedData.push(new InvItems(myItem[0],myItem[1]));
       }
     })
-
-    fs.writeFile('../JSON/fetchedData.json', JSON.stringify(formattedData,null,2), err => {
-      if (err) {
-       console.log('Error writing file', err)
-     } else {
-       console.log('fetched data')
-       }
-     })
-     formattedData =[];
+    console.log(formattedData)
+setTimeout(() => {
+  fs.writeFile('../JSON/fetchedData.json', JSON.stringify(formattedData,null,2), err => {
+    if (err) {
+     console.log('Error writing file', err)
+   } else {
+     console.log('fetched data')
+     }
+   })
+}, 2000);
+    
   }
   module.exports.getSheets = getSheets;
   

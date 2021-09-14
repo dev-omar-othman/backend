@@ -26,7 +26,6 @@ var req = https.request(options, function (res) {
     var body = Buffer.concat(chunks);
     var orders = JSON.parse(body.toString());
     for(var i = 0; i < orders.orders.length; i++){
-        
         let orderData = {
             orderNumber : orders.orders[i].id,
             orderTotalPrice : orders.orders[i].total_price,
@@ -45,10 +44,10 @@ var req = https.request(options, function (res) {
             
         }
         for(var j = 0; orders.orders[i].line_items.length > j ; j++){
-          for(var quantityCounter = 0; quantityCounter < orders.orders[i].line_items[j].quantity; quantityCounter++ ){
+          for(var quantityCounter = 0; quantityCounter < orders.orders[i].line_items[j].fulfillable_quantity; quantityCounter++ ){
             orderData.orderDescription.push (orders.orders[i].line_items[j].title +" "+ orders.orders[i].line_items[j].variant_title);
             orderData.itemsSku.push(orders.orders[i].line_items[j].sku);
-            orderData.itemsQuantity.push(new Items(orders.orders[i].line_items[j].sku,orders.orders[i].line_items[j].quantity))
+            orderData.itemsQuantity.push(new Items(orders.orders[i].line_items[j].sku,orders.orders[i].line_items[j].fulfillable_quantity))
           }
             
         }

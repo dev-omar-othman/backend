@@ -27,6 +27,7 @@ app.get('/runApp', function(req,res){
   finally{
     setTimeout(() => {
       require('./newFiltering').filterMe();
+      res.send("done filtering");
     }, 2000);
     
   }

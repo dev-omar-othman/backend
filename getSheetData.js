@@ -36,8 +36,8 @@ async function getSheets(){ //client instance
         "2x Leash!E2:F48",
         "3x Leash!E2:F48",
         "Harness!E2:F108",
-        "TOL Collar !E2:F29",
-        "TOL/Maritime Leash!E2:F27",
+        "TOL Collar !E2:F112",
+        "TOL/Maritime Leash!E2:F195",
       ]
       });
     

@@ -21,10 +21,11 @@ var req = https.request(options, function (res) {
 
   res.on("end", function (chunk) {
     var body = Buffer.concat(chunks);
+    global.test = body.toString();
   });
 
   res.on("error", function (error) {
-    console.error(error);
+    console.log(error)
   });
 });
 

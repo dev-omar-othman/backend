@@ -10,11 +10,6 @@ const {google} = require("googleapis");
 app.use(cors({origin: '*'}));
 app.use(express.static("../JSON",{etag: false})); // exposes index.html, per below
 
-app.get('/test', function(req,res){
-req.headers['mode'] = 'no-cors';
-require('./getSheetData').getSheets();
-});
-
 app.get('/runApp', function(req,res){
   req.headers['mode'] = 'no-cors';
   try{
@@ -53,7 +48,15 @@ app.get("/fulfillSheets", async (req , res) =>{
 
 app.get("/fulfillShopify", async (req , res) =>{
   require('./shopifyFulfillment').shopifyFulfillment(req.query.orderid , req.query.trackingUrl,req.query.trackingNo);
-  res.send("order Fulfilled!");
+  setTimeout(() => {
+    res.send({
+      data : {
+        error : global.test
+      }
+    });
+  }, 1000);
+  
 });
+
 
 server.listen(port,() => console.log(`running on ${port}`));

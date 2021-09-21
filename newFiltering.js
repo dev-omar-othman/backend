@@ -1,4 +1,4 @@
-function filterMe(){
+async function filterMe(callback){
 var fs = require('fs');
 var inventory = JSON.parse(fs.readFileSync('../JSON/fetchedData.json','utf-8'));
 var tempInv = inventory;
@@ -47,6 +47,7 @@ function canFulfilOrder(order) {
          console.log('Error writing file', err)
        } else {
          console.log('updated orders we can fulfil')
+         callback()
          }
        })
 
@@ -55,9 +56,11 @@ function canFulfilOrder(order) {
          console.log('Error writing file', err)
        } else {
          console.log("updated orders we can't fulfil")
+         
          }
-       })   
+       })
 }
 displayOrdersWeCanFulfill();
+
 }
 module.exports.filterMe = filterMe;

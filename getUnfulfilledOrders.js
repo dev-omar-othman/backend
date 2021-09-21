@@ -1,7 +1,8 @@
 var https = require('follow-redirects').https;
 var fs = require('fs');
+var async = require("async");
 let  finalOrders = []
-function getOrders(){
+ async function getOrders(callback){
 var options = {
   'method': 'GET',
   'hostname': 'mollyandstitchus.myshopify.com',
@@ -54,11 +55,12 @@ var req = https.request(options, function (res) {
         finalOrders.push(orderData);
     
     }
-    fs.writeFile('../JSON/unfulfilledOrders.json', JSON.stringify(finalOrders,null,2), err => {
+     fs.writeFile('../JSON/unfulfilledOrders.json', JSON.stringify(finalOrders,null,2), err => {
       if (err) {
        console.log('Error writing file', err)
      } else {
-       console.log('fetched unfulfilled orders')
+       console.log('fetched unfulfilled orders');
+       callback();
        }
      })
      finalOrders = [];
@@ -70,6 +72,7 @@ var req = https.request(options, function (res) {
 });
 
 req.end();
+
 }
 module.exports.getOrders = getOrders;
 module.exports.finalOrders = finalOrders;

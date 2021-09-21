@@ -1,6 +1,6 @@
 var https = require('follow-redirects').https;
 var fs = require('fs');
-function shopifyFulfillment(orderId,trackingUrl,trackingNo){
+function shopifyFulfillment(orderId,trackingUrl,trackingNo,callback){
 var options = {
   'method': 'POST',
   'hostname': 'mollyandstitchus.myshopify.com',
@@ -21,7 +21,8 @@ var req = https.request(options, function (res) {
 
   res.on("end", function (chunk) {
     var body = Buffer.concat(chunks);
-    global.test = body.toString();
+    global.shopifyRes = body.toString();
+    callback();
   });
 
   res.on("error", function (error) {

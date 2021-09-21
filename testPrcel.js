@@ -1,6 +1,6 @@
 var https = require('follow-redirects').https;
 var fs = require('fs');
-async function setPostData(newData){
+async function setPostData(newData,callback){
 var postData = newData;
 var options = {
   'method': 'POST',
@@ -14,26 +14,33 @@ var options = {
   'maxRedirects': 20
 };
 
-var req = https.request(options, await function (res) {
-  var chunks = [];
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
+  var req = https.request(options, function (res) {
+    var chunks = [];
+    res.on("data", function (chunk) {
+      chunks.push(chunk);
+    });
+  
+    res.on("end", function (chunk) {
+      var body = Buffer.concat(chunks);
+      global.sendleRes = body.toString();
+      if(body.toString().indexOf("message") != -1){
+        callback();
+        return
+      }else{
+      global.shippingLabel = JSON.parse(body.toString()).labels[0].url;
+      global.trackingUrl = JSON.parse(body.toString()).tracking_url;
+      global.trackingNo = JSON.parse(body.toString()).sendle_reference;
+      callback();
+      }
+    });
+    res.on("error", function (error) {
+      console.error(error);
+    });
   });
-
-  res.on("end",  function (chunk) {
-    var body = Buffer.concat(chunks);
-    global.shippingLabel = JSON.parse(body.toString()).labels[0].url;
-    global.trackingUrl = JSON.parse(body.toString()).tracking_url;
-    global.trackingNo = JSON.parse(body.toString()).sendle_reference;
-  });
-  res.on("error", function (error) {
-    console.error(error);
-  });
-});
-
-req.write(postData);
-
-req.end();
+  
+   req.write(postData);
+  
+  req.end();
 
 }
 module.exports.setPostData = setPostData;

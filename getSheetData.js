@@ -1,4 +1,4 @@
-async function getSheets(){ //client instance
+async function getSheets(callback){ //client instance
     var fs = require('fs');
     const {google} = require("googleapis");
     const auth = new google.auth.GoogleAuth({
@@ -50,16 +50,14 @@ async function getSheets(){ //client instance
         formattedData.push(new InvItems(myItem[0],myItem[1]));
       }
     })
-setTimeout(() => {
   fs.writeFile('../JSON/fetchedData.json', JSON.stringify(formattedData,null,2), err => {
     if (err) {
      console.log('Error writing file', err)
    } else {
      console.log('fetched data')
+     callback();
      }
    })
-}, 2000);
-    
   }
   module.exports.getSheets = getSheets;
   

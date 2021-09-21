@@ -48,7 +48,7 @@ var req = https.request(options, function (res) {
           for(var quantityCounter = 0; quantityCounter < orders.orders[i].line_items[j].fulfillable_quantity; quantityCounter++ ){
             orderData.orderDescription.push (orders.orders[i].line_items[j].title +" "+ orders.orders[i].line_items[j].variant_title);
             orderData.itemsSku.push(orders.orders[i].line_items[j].sku);
-            orderData.itemsQuantity.push(new Items(orders.orders[i].line_items[j].sku,orders.orders[i].line_items[j].fulfillable_quantity))
+            orderData.itemsQuantity.push(new Items(orders.orders[i].line_items[j].sku,(orders.orders[i].line_items[j].fulfillable_quantity / orders.orders[i].line_items[j].fulfillable_quantity)))
           }
             
         }

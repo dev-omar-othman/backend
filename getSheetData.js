@@ -30,12 +30,12 @@ async function getSheets(callback){ //client instance
       const getRows = await googleSheets.spreadsheets.values.batchGet({
         auth,
         spreadsheetId,
-        ranges: ["Butter Collar!E2:F84",
-        "Butter Retriever Collar!E2:F48",
-        "City Leash!E2:F48",
-        "2x Leash!E2:F48",
-        "3x Leash!E2:F48",
-        "Harness!E2:F108",
+        ranges: ["Butter Collar!E2:F91",
+        "Butter Retriever Collar!E2:F52",
+        "City Leash!E2:F52",
+        "2x Leash!E2:F52",
+        "3x Leash!E2:F52",
+        "Harness!E2:F117",
         "TOL Collar !E2:F112",
         "TOL/Maritime Leash!E2:F195",
       ]

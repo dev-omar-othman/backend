@@ -41,7 +41,7 @@ var req = https.request(options, function (res) {
             itemsSku:[],
             itemsQuantity:[],
             orderDescription:[],
-            orderDate : new Date (orders.orders[i].updated_at),
+            orderDate : new Date (orders.orders[i].created_at),
             
         }
         for(var j = 0; orders.orders[i].line_items.length > j ; j++){

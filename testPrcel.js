@@ -27,7 +27,7 @@ var options = {
         callback();
         return
       }else{
-      global.shippingLabel = JSON.parse(body.toString()).labels[0].url;
+      global.shippingLabel = JSON.parse(body.toString()).labels[1].url;
       global.trackingUrl = JSON.parse(body.toString()).tracking_url;
       global.trackingNo = JSON.parse(body.toString()).sendle_reference;
       callback();

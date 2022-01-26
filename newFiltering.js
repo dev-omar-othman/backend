@@ -1,8 +1,8 @@
 async function filterMe(callback){
 var fs = require('fs');
-var inventory = JSON.parse(fs.readFileSync('../JSON/fetchedData.json','utf-8'));
+var inventory = JSON.parse(fs.readFileSync('../JSON/database_inv.json','utf-8'));
 var tempInv = inventory;
-var orders = JSON.parse(fs.readFileSync('../JSON/unfulfilledOrders.json','utf-8'));
+var orders = JSON.parse(fs.readFileSync('../JSON/unfulfilledOrders.json','utf-8')).sort((a, b) => new Date(a.orderDate) - new Date(b.orderDate));
 var ordersToFulfill = [];
 var ordersCantBeFulfilled = []
 
@@ -11,10 +11,10 @@ function canFulfilOrder(order) {
     for(var i = 0; i < items.length; i++){
         var itemExists = false;
         for(var y = 0; y < tempInv.length; y++){
-            if(items[i].barcode == tempInv[y].barcode){
+            if(items[i].barcode == tempInv[y].Barcode){
                 itemExists = true;
-                if (items[i].qty <= tempInv[y].qty){
-                    tempInv[y].qty -= items[i].qty
+                if (items[i].qty <= tempInv[y].Quantity){
+                    tempInv[y].Quantity -= items[i].qty
                 }
                 else {
                     tempInv = inventory;

@@ -51,6 +51,7 @@ app.get("/createorderstable", (req, res) =>{
 
 //select data
 app.get("/getinventory", (req, res) => {
+  req.headers["mode"] = "no-cors";
   let sql = `SELECT Barcode, Quantity FROM all_products`;
   let query = db.query(sql, (err, result) =>{
     if(err) {

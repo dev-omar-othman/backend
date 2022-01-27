@@ -1,6 +1,6 @@
 async function filterMe(callback){
 var fs = require('fs');
-var inventory = JSON.parse(fs.readFileSync('../JSON/fetchedData.json','utf-8'));
+var inventory = JSON.parse(fs.readFileSync('../JSON/database_inv.json','utf-8'));
 var tempInv = inventory;
 var orders = JSON.parse(fs.readFileSync('../JSON/unfulfilledOrders.json','utf-8')).sort((a, b) => new Date(a.orderDate) - new Date(b.orderDate));
 var ordersToFulfill = [];

@@ -38,6 +38,8 @@ async function getSheets(callback){ //client instance
         "Harness!E2:F117",
         "TOL Collar !E2:F112",
         "TOL/Maritime Leash!E2:F195",
+        "Soft Rock Collection!E2:F37",
+        "The Alpine Collection!D2:E48",         
       ]
       });
     

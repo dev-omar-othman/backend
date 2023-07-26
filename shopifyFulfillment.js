@@ -4,7 +4,7 @@ function shopifyFulfillment(orderId,trackingUrl,trackingNo,callback){
 var options = {
   'method': 'POST',
   'hostname': 'mollyandstitchus.myshopify.com',
-  'path': `/admin/api/2021-07/orders/${orderId}/fulfillments.json`,
+  'path': `/admin/api/2023-01/fulfillments.json`,
   'headers': {
     'Authorization': 'Basic OTJjOWE3NDdmMjZmODgzNjM4OGM4NDFhMDYzZjMwZDI6c2hwcGFfNDg4NDNmNTNjNDYyZmI5OGRiY2U2ZjI2NDBlNzE2MjY=',
     'Content-Type': 'application/json'
@@ -32,15 +32,17 @@ var req = https.request(options, function (res) {
 
 var postData = JSON.stringify({
   "fulfillment": {
-    "location_id": 61126803622,
-    "tracking_number": trackingNo,
-    "tracking_urls": [
-      trackingUrl
-    ],
-    "notify_customer": true
+      "line_items_by_fulfillment_order": [
+          {
+              "fulfillment_order_id": orderId
+          }
+      ],
+      "tracking_info":{
+        "number": trackingNo,
+        "url": trackingUrl
+      }
   }
 });
-
 req.write(postData);
 
 req.end();

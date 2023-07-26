@@ -8,6 +8,7 @@ const port = process.env.PORT || 8081;
 const app = express();
 var server = http.createServer(app);
 const {google} = require("googleapis");
+
 var db = mysql.createConnection({
   host     : 'fulfillmentapp.cmva2pijtmrz.us-east-2.rds.amazonaws.com',
   user     : 'fulfillmentapp',
@@ -50,8 +51,8 @@ app.get("/createorderstable", (req, res) =>{
 
 
 //select data
+
 app.get("/getinventory", (req, res) => {
-  req.headers["mode"] = "no-cors";
   let sql = `SELECT Barcode, Quantity FROM all_products`;
   let query = db.query(sql, (err, result) =>{
     if(err) {

@@ -216,5 +216,13 @@ app.get("/fulfillShopify", async (req , res) =>{
   }
 });
 
+// shopify fulfillment order id
+app.get("/fulfillmentorderid", async (req , res) =>{
+  req.headers["mode"] = "no-cors";
+  await require('./fulfillmentorderid').shopifyFulfillmentid(req.query.orderid, sendResponse);
+  function sendResponse(){
+    res.send({fulfillmentOrderId :global.fulfillmentOrderId});
+  }
+});
 
 server.listen(port,() => console.log(`running on ${port}`));

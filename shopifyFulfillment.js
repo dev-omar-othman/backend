@@ -4,7 +4,7 @@ function shopifyFulfillment(orderId,trackingUrl,trackingNo,callback){
 var options = {
   'method': 'POST',
   'hostname': 'mollyandstitchus.myshopify.com',
-  'path': `/admin/api/2023-01/fulfillments.json`,
+  'path': `/admin/api/2024-01/fulfillments.json`,
   'headers': {
     'Authorization': 'Basic OTJjOWE3NDdmMjZmODgzNjM4OGM4NDFhMDYzZjMwZDI6c2hwcGFfNDg4NDNmNTNjNDYyZmI5OGRiY2U2ZjI2NDBlNzE2MjY=',
     'Content-Type': 'application/json'

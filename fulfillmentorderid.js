@@ -5,7 +5,7 @@ function shopifyFulfillmentid(order_id, callback){
 var options = {
   'method': 'GET',
   'hostname': 'mollyandstitchus.myshopify.com',
-  'path': `/admin/api/2023-07/orders/${order_id}/fulfillment_orders.json`,
+  'path': `/admin/api/2024-01/orders/${order_id}/fulfillment_orders.json`,
   'headers': {
     'Authorization': 'Basic OTJjOWE3NDdmMjZmODgzNjM4OGM4NDFhMDYzZjMwZDI6c2hwcGFfNDg4NDNmNTNjNDYyZmI5OGRiY2U2ZjI2NDBlNzE2MjY=',
     'Content-Type': 'application/json'
